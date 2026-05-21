@@ -10,6 +10,24 @@ Entry point for AI agents working on cross-project publication strategy.
 - `docs/todo/current.md` — active cross-project work
 - `docs/decisions/` — why past choices were made
 
+## Language Policy
+
+**Write all repository documentation in English.**
+
+This applies to every Markdown file in this repository, including:
+
+- `README.md` and `AGENTS.md`
+- `docs/todo/`, `docs/decisions/`, `docs/experiments/`, and any future docs under `docs/`
+
+Exceptions:
+
+- **Quoted titles** of published or draft outward assets (for example a Japanese Zenn article title) may stay in the original language when the experiment log references them.
+- **URLs and repo paths** stay as-is.
+
+Do not add Japanese-local notes, parallel `docs/ja/` trees, or mixed-language versions of the same document unless a future decision record explicitly changes this policy.
+
+GitHub Issue and PR bodies may use Japanese for maintainer workflow; the **durable docs in this repo stay English**.
+
 ## Operating Rules
 
 - This repo is **documentation and strategy only**. No product code.
