@@ -16,10 +16,11 @@ Product implementation Issues stay in NeNe / NENE2 / nene2-python.
 - NeNe #179: DEV Community English article.
 - NeNe #180: Reddit / Hacker News only after first article feedback.
 - NeNe #145 / #165: Reference implementation before widest NeNe outreach.
-- GitHub Profile README: portfolio entry linking three repos.
 - NENE2: first dedicated publication experiment (channel TBD after NeNe Qiita metrics).
 
 ## Recently Completed
+
+- #9: GitHub Profile README at [hideyukiMORI/hideyukiMORI](https://github.com/hideyukiMORI/hideyukiMORI).
 
 - #7: Clarify Japanese is only for Zenn/Qiita article assets in product repos (decision 0003).
 - #5: English language for Issues, PRs, and commit messages (decision 0002).
