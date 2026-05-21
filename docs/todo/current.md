@@ -21,6 +21,7 @@ Product implementation Issues stay in NeNe / NENE2 / nene2-python.
 
 ## Recently Completed
 
+- #7: Clarify Japanese is only for Zenn/Qiita article assets in product repos (decision 0003).
 - #5: English language for Issues, PRs, and commit messages (decision 0002).
 - #2: Issue-driven workflow and repository structure (CONTRIBUTING, workflow, commit conventions, roadmap, milestones).
 - #1: English language policy for all repository documentation.

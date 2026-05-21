@@ -45,9 +45,9 @@ Product-specific publication notes stay in each repository. This repository hold
 
 ## Language Policy
 
-All text in this repository is written in **English**: Markdown docs, GitHub Issues, pull requests, and commit messages. See `AGENTS.md` and `docs/decisions/0002-english-collaboration-language.md`.
+All text in this repository is written in **English**: Markdown docs, GitHub Issues, pull requests, and commit messages. See `AGENTS.md`, decision [0002](docs/decisions/0002-english-collaboration-language.md), and [0003](docs/decisions/0003-japanese-outward-article-assets-only.md).
 
-Outward-facing articles (Zenn, Qiita, and so on) live in product repos and may use Japanese or English per channel; this repo only logs strategy and experiments in English.
+**Japanese is only for outward article source data** (Zenn, Qiita, and similar) stored in product repos—not in this repository. Experiment logs here link to those assets and stay in English.
 
 ## Workflow
 
