@@ -27,11 +27,16 @@ Product-specific publication notes stay in each repository. This repository hold
 
 ## Start Here
 
+- `docs/CONTRIBUTING.md` — collaboration policy
+- `docs/workflow.md` — Issue-driven workflow
+- `docs/development/commit-conventions.md` — commit message rules
+- `docs/roadmap.md` — portfolio direction
+- `docs/todo/current.md` — cross-project active work
 - `docs/positioning-matrix.md` — how the three weapons differ and which to push when
 - `docs/channel-playbook.md` — Zenn / Qiita / DEV / Reddit / HN rules
-- `docs/todo/current.md` — cross-project active work
 - `docs/decisions/` — decision records (context, decision, alternatives)
 - `docs/experiments/` — channel experiments with hypotheses and metrics
+- `AGENTS.md` — AI agent entry point
 
 ## Related Product Docs
 
@@ -46,6 +51,9 @@ Outward-facing articles (Zenn, Qiita, and so on) live in product repos and may u
 
 ## Workflow
 
-- GitHub Issues in this repo track cross-project promotion tasks.
-- Product code or product README changes stay in product repos; link them from Issues here.
+Issue-driven, aligned with NeNe and NENE2. See `docs/workflow.md`.
+
+- Create or reuse a GitHub Issue before changing strategy docs.
+- Branch as `type/issue-number-summary`; do not commit directly to `main`.
+- Product code, README, and article drafts stay in product repos; link them from Issues here.
 - Record decisions and experiment results before changing portfolio priority.
