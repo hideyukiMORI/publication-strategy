@@ -21,7 +21,7 @@ Work from GitHub Issues, same pattern as NeNe and NENE2:
 1. Create or reuse an Issue in **this repository** before editing strategy docs.
 2. Branch from `main` as `type/issue-number-summary`. Do not commit directly to `main`.
 3. Update `docs/todo/current.md` (and roadmap/milestones when direction changes).
-4. Commit with Conventional Commits; description/body in Japanese, type/scope in English; include `(#issue)`.
+4. Commit with Conventional Commits in **English**; include `(#issue)` in the subject when practical.
 5. Push, open PR with `Closes #number`, merge, sync `main`.
 
 Product asset changes (articles, README, code) use Issues in NeNe / NENE2 / nene2-python. Link them from Issues here when logging experiments.
@@ -30,21 +30,23 @@ If the user explicitly limits scope (investigation only, no commit, no PR), foll
 
 ## Language Policy
 
-**Write all repository documentation in English.**
+**Write all repository text in English.**
 
-This applies to every Markdown file in this repository, including:
+This applies to:
 
-- `README.md` and `AGENTS.md`
-- `docs/todo/`, `docs/decisions/`, `docs/experiments/`, and any future docs under `docs/`
+- Every Markdown file in this repository (`README.md`, `AGENTS.md`, and all of `docs/`)
+- GitHub Issue titles and bodies
+- Pull request titles and bodies
+- Commit message descriptions and bodies (Conventional Commit `type` and `scope` stay in English)
 
 Exceptions:
 
-- **Quoted titles** of published or draft outward assets (for example a Japanese Zenn article title) may stay in the original language when the experiment log references them.
+- **Quoted titles** of published or draft outward assets (for example a Japanese Zenn article title) may stay in the original language when an experiment log references them.
 - **URLs and repo paths** stay as-is.
 
 Do not add Japanese-local notes, parallel `docs/ja/` trees, or mixed-language versions of the same document unless a future decision record explicitly changes this policy.
 
-GitHub Issue and PR bodies may use Japanese for maintainer workflow; the **durable docs in this repo stay English**.
+Product repos (NeNe, NENE2, nene2-python) keep their own language rules for code, Issues, and articles.
 
 ## Operating Rules
 
