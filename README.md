@@ -38,6 +38,12 @@ Product-specific publication notes stay in each repository. This repository hold
 - NeNe: `docs/publication-strategy.md` in [NeNe](https://github.com/hideyukiMORI/NeNe) (single-product case study)
 - NeNe Zenn article source: `docs/articles/zenn-renovating-legacy-php-framework.md`
 
+## Documentation Language
+
+All documentation in this repository is written in **English**. See `AGENTS.md` for the full language policy.
+
+Outward-facing articles (Zenn, Qiita, and so on) live in product repos and may use Japanese or English per channel; this repo only logs strategy and experiments in English.
+
 ## Workflow
 
 - GitHub Issues in this repo track cross-project promotion tasks.
