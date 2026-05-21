@@ -43,9 +43,9 @@ Product-specific publication notes stay in each repository. This repository hold
 - NeNe: `docs/publication-strategy.md` in [NeNe](https://github.com/hideyukiMORI/NeNe) (single-product case study)
 - NeNe Zenn article source: `docs/articles/zenn-renovating-legacy-php-framework.md`
 
-## Documentation Language
+## Language Policy
 
-All documentation in this repository is written in **English**. See `AGENTS.md` for the full language policy.
+All text in this repository is written in **English**: Markdown docs, GitHub Issues, pull requests, and commit messages. See `AGENTS.md` and `docs/decisions/0002-english-collaboration-language.md`.
 
 Outward-facing articles (Zenn, Qiita, and so on) live in product repos and may use Japanese or English per channel; this repo only logs strategy and experiments in English.
 

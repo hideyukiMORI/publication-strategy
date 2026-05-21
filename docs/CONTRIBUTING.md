@@ -36,6 +36,8 @@ When a promotion task spans both layers, open an Issue here for strategy/logging
 
 Do not commit API tokens, private analytics exports with identifying data, or credentials. Metrics snapshots should use aggregate public-safe numbers.
 
-## Documentation Language
+## Language Policy
 
-All Markdown in this repository is written in **English**. See `AGENTS.md`. Issue and PR bodies may use Japanese for maintainer workflow.
+All text in this repository is written in **English**: Markdown, GitHub Issues, pull requests, and commit messages. See `AGENTS.md` and `docs/decisions/0002-english-collaboration-language.md`.
+
+Product repos keep their own language rules for code and outward articles.
