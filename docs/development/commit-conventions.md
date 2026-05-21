@@ -1,6 +1,6 @@
 # Commit Message Conventions
 
-This repository uses Conventional Commits, aligned with NeNe and NENE2.
+This repository uses Conventional Commits. All commit text is **English**.
 
 ## Format
 
@@ -14,14 +14,13 @@ This repository uses Conventional Commits, aligned with NeNe and NENE2.
 
 ## Language
 
-- Keep `type`, `scope`, `BREAKING CHANGE`, and other Conventional Commits keywords in **English**.
-- Write the **description and body in Japanese**.
+- Write `type`, `scope`, description, body, and footers in **English**.
 - Include the related GitHub Issue number in the subject when practical.
 
 Example:
 
 ```text
-docs(experiments): NeNe Qiita 実験ログ EXP-002 を追加する (#12)
+docs(experiments): add NeNe Qiita experiment log EXP-002 (#12)
 ```
 
 ## Common Types
@@ -42,3 +41,7 @@ Use the body when the reason is not obvious from the subject. Explain why the ch
 ## Breaking Changes
 
 Use `!` or a `BREAKING CHANGE:` footer when documented policy, experiment ID scheme, or folder conventions change incompatibly.
+
+## Note on Product Repos
+
+NeNe and NENE2 may use Japanese commit descriptions in their own repositories. That convention does **not** apply here.
