@@ -27,7 +27,7 @@ Write the following in **English**:
 
 ## Exceptions
 
-- **Quoted titles** of outward assets (for example a Japanese Zenn article title) may stay in the original language inside experiment logs.
+- **Quoted titles or short excerpts** of outward article assets may stay in the original language inside English experiment logs. Full Japanese article body copy does not belong in this repo. See decision 0003.
 - **URLs, repo paths, and product-repo Issue references** stay as-is.
 - **Product repositories** (NeNe, NENE2, nene2-python) keep their own language policies; this decision applies only to `publication-strategy`.
 

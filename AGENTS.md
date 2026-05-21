@@ -41,12 +41,14 @@ This applies to:
 
 Exceptions:
 
-- **Quoted titles** of published or draft outward assets (for example a Japanese Zenn article title) may stay in the original language when an experiment log references them.
+- **Quoted titles or short excerpts** from outward article assets (for example a Japanese Zenn title) may appear in English experiment logs for traceability.
 - **URLs and repo paths** stay as-is.
 
-Do not add Japanese-local notes, parallel `docs/ja/` trees, or mixed-language versions of the same document unless a future decision record explicitly changes this policy.
+**Japanese body copy does not belong in this repository.** Japanese is allowed only in **outward article source files** stored in product repos (Zenn, Qiita, and similar channels). See `docs/decisions/0003-japanese-outward-article-assets-only.md`.
 
-Product repos (NeNe, NENE2, nene2-python) keep their own language rules for code, Issues, and articles.
+Do not add Japanese notes, article drafts, parallel `docs/ja/` trees, or mixed-language strategy docs unless a future decision record changes this policy.
+
+Product repos (NeNe, NENE2, nene2-python) hold article assets and keep their own rules for code and maintainer workflow.
 
 ## Operating Rules
 
