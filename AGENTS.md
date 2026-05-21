@@ -5,10 +5,28 @@ Entry point for AI agents working on cross-project publication strategy.
 ## Read First
 
 - `README.md` — north star and scope split
+- `docs/CONTRIBUTING.md` — collaboration policy
+- `docs/workflow.md` — Issue-driven workflow
+- `docs/development/commit-conventions.md` — commit message rules
+- `docs/roadmap.md` — portfolio direction
+- `docs/todo/current.md` — current work
 - `docs/positioning-matrix.md` — three products as weapons
 - `docs/channel-playbook.md` — channel rules
-- `docs/todo/current.md` — active cross-project work
 - `docs/decisions/` — why past choices were made
+
+## Issue-Driven Workflow
+
+Work from GitHub Issues, same pattern as NeNe and NENE2:
+
+1. Create or reuse an Issue in **this repository** before editing strategy docs.
+2. Branch from `main` as `type/issue-number-summary`. Do not commit directly to `main`.
+3. Update `docs/todo/current.md` (and roadmap/milestones when direction changes).
+4. Commit with Conventional Commits; description/body in Japanese, type/scope in English; include `(#issue)`.
+5. Push, open PR with `Closes #number`, merge, sync `main`.
+
+Product asset changes (articles, README, code) use Issues in NeNe / NENE2 / nene2-python. Link them from Issues here when logging experiments.
+
+If the user explicitly limits scope (investigation only, no commit, no PR), follow that instruction.
 
 ## Language Policy
 

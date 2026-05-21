@@ -1,12 +1,13 @@
 # Current TODO
 
-Cross-project promotion work. GitHub Issues in **this repository** are the source of truth for actionable tasks.
+Cross-project promotion work. **GitHub Issues in this repository are the source of truth** for actionable work here.
+
+This file summarizes active and next work for humans and AI agents. It does not replace Issues. See `docs/workflow.md`.
 
 Product implementation Issues stay in NeNe / NENE2 / nene2-python.
 
 ## Active
 
-- Bootstrap this repository and link it from portfolio planning.
 - NeNe #178: Qiita hands-on article (tracked in [NeNe](https://github.com/hideyukiMORI/NeNe) — link experiment here when published).
 - Define weekly metrics capture day (suggest: same weekday each week).
 
@@ -20,7 +21,9 @@ Product implementation Issues stay in NeNe / NENE2 / nene2-python.
 
 ## Recently Completed
 
-- 2026-05-22: Created `publication-strategy` repository for cross-project promotion logging.
+- #2: Issue-driven workflow and repository structure (CONTRIBUTING, workflow, commit conventions, roadmap, milestones).
+- #1: English language policy for all repository documentation.
+- Initial bootstrap: cross-project promotion repository and EXP-001.
 - NeNe #177: Zenn renovation story (see `docs/experiments/EXP-001-nene-zenn-article.md`).
 - NeNe publication prep sequence (#162–#176, README, composer metadata).
 
