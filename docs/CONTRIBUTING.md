@@ -38,6 +38,6 @@ Do not commit API tokens, private analytics exports with identifying data, or cr
 
 ## Language Policy
 
-All text in this repository is written in **English**: Markdown, GitHub Issues, pull requests, and commit messages. See `AGENTS.md` and `docs/decisions/0002-english-collaboration-language.md`.
+All text in this repository is written in **English**: Markdown, GitHub Issues, pull requests, and commit messages. See `AGENTS.md`, decision 0002, and decision 0003.
 
-Product repos keep their own language rules for code and outward articles.
+**Japanese is only for article assets** (Zenn, Qiita, and similar outward channels) stored in product repos. Do not add Japanese article drafts or body copy here.
