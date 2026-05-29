@@ -1,92 +1,97 @@
-# Decision 0004: NeNe Clear — Product Strategy and Repository Split
+# Decision 0004: NeNe Clear vs NeNe Invoice — Domain Split
 
-Date: 2026-05-29
+Date: 2026-05-29 (amended 2026-05-29)
 
 ## Status
 
-Accepted
+Accepted (amended)
 
 ## Context
 
-The maintainer identified a new **application-layer** product in the NeNe
-portfolio: self-hosted **quote-to-cash billing** for Japan SMB (適格請求書,
-shared hosting, MCP-ready). Working name exploration landed on **NeNe Clear**
-(clearing / clarity / 消込).
+The maintainer identified two **separate back-office domains** for Japan SMB
+self-hosted ops:
 
-An initial public repository **`nene-invoice`** was used for early governance
-and runtime experiments. Strategy, philosophy, and long-term product identity
-belong in **this repository** (`publication-strategy`). The **canonical product
-repository** is **`nene-clear`** (private until launch-ready).
+| Domain (JA) | Domain (EN) | Product |
+| --- | --- | --- |
+| 見積・請求・入金管理 | Quote, invoice, payment management | **NeNe Invoice** → `nene-invoice` |
+| 入金消込・督促管理 | Payment reconciliation & dunning | **NeNe Clear** → `nene-clear` |
 
-Sibling applications already shipped: NeNe Records, NeNe Corpus, NeNe Concierge.
+These are **not** one product with phases. They are **not** upper/lower layers,
+**not** a migration path, and **not** upper compatible. Operators who need both
+run **two sibling applications** connected via HTTP.
+
+Early documentation incorrectly described Clear as "quote-to-cash billing" with
+reconciliation as "Expansion #1." That conflation is **rejected**.
 
 ## Decision
 
-### Product identity
+### Product identity — NeNe Clear
 
 | Field | Value |
 | --- | --- |
 | **Public product name** | **NeNe Clear** |
-| **Tagline (EN)** | Clear billing from quote to cash. |
-| **Tagline (JA, marketing)** | 見積から入金まで、明快に。 |
-| **Canonical private repo** | `hideyukiMORI/nene-clear` |
-| **Framework** | NENE2 (PHP 8.4), same pattern as Records / Corpus / Concierge |
-| **Primary market** | Japan SMB on Tier A shared hosting (FTP + MySQL) |
+| **Tagline (EN)** | Clear deposits. Collect with confidence. |
+| **Tagline (JA, marketing)** | 入金を消込し、未収を見える化する。 |
+| **Domain** | Payment reconciliation & dunning **only** |
+| **Canonical repo** | `hideyukiMORI/nene-clear` (private until launch) |
+| **Framework** | NENE2 (PHP 8.4) |
 | **License (when public)** | MIT |
+
+### Product identity — NeNe Invoice
+
+| Field | Value |
+| --- | --- |
+| **Domain** | Quote, invoice, payment management |
+| **Canonical repo** | `hideyukiMORI/nene-invoice` (public) |
+| **Relationship to Clear** | **Upstream sibling** — not deprecated, not to be archived for Clear |
 
 ### Repository roles
 
 | Repository | Visibility | Role |
 | --- | --- | --- |
-| **`nene-clear`** | **Private** (until launch) | Canonical product: docs, code, OpenAPI, releases |
-| **`nene-invoice`** | Public | Early experiment; **do not** treat as strategy source of truth; maintainer may revert or archive |
-| **`publication-strategy`** | Public | Portfolio decision, expansion sequence, philosophy summary (this file + `docs/products/nene-clear.md`) |
+| **`nene-invoice`** | Public | **Quote · invoice · payment** — billing document SSOT |
+| **`nene-clear`** | Private (until launch) | **Reconciliation · dunning** — bank match & overdue reminders |
+| **`publication-strategy`** | Public | Portfolio decisions (this file + `docs/products/nene-clear.md`) |
 
-Product implementation Issues and PRs go to **`nene-clear`** after initialization.
+**Do not** describe `nene-invoice` as "discard after migration." **Do not**
+describe `nene-clear` as replacing or superseding Invoice.
 
-### Post-MVP expansion sequence (approved)
+### Integration
 
-Implement **in order** after Phase 1–3 core billing (quote → invoice → payment → PDF/admin):
+- `NeNe Clear → NeNe Invoice API` (read invoices/payments; write payments after match)
+- Separate databases, separate admin UIs, separate OpenAPI contracts
+- No shared PHP codebase beyond NENE2 framework dependency
 
-1. **Payment reconciliation & dunning** — 入金消込・督促管理
-2. **Purchase order & delivery note** — 発注書・納品書管理
-3. **Contract term & renewal** — 契約期限・更新管理
-4. **Small-scale subscription billing** — 小規模サブスク請求管理
-5. **Minimal expense reimbursement** — 経費申請の最小版
+### AI-era design principle (both products)
 
-Details: [`docs/products/nene-clear.md`](../products/nene-clear.md).
-
-### AI-era design principle
-
-Operators confirm in Admin UI; AI assistants (Claude, Codex, MCP clients)
-**propose** via OpenAPI/MCP. Billing truth stays in MySQL on the operator's
-server — not in chat logs. FTP Tier A does not require AI on the server.
+Human confirms in Admin UI; AI proposes via OpenAPI/MCP. Audit trail for
+matches (Clear) and issuance/payments (Invoice).
 
 ### What NeNe Clear is not
 
-- Not full accounting / general ledger (freee / Money Forward territory)
-- Not payroll or expense platform at full scope (Expansion #5 is minimal only)
-- Not a WordPress plugin; sibling HTTP integration to Records / Concierge only
+- Not quote, invoice, or qualified invoice PDF
+- Not upper compatible with `nene-invoice`
+- Not full accounting / general ledger
+- Not a debt collection agency
 
 ## Alternatives Considered
 
 | Option | Rejected because |
 | --- | --- |
-| Keep only `nene-invoice` public | Name too narrow; strategy docs mixed with throwaway experiment |
-| Strategy docs only in `nene-clear` | Portfolio decisions invisible; repeats publication-strategy purpose |
-| Product name **NeNe Invoice** | Sounds like PDF-only; undersells reconciliation roadmap |
-| Product name **NeNe Collect** | Too aggressive (debt collection tone) |
-| Public `nene-clear` from day one | Premature before MVP; private allows doc/code iteration |
+| One repo "quote-to-cash" | Conflates document and reconciliation domains; wrong product boundaries |
+| Clear as successor to Invoice | Implies migration and upper compatibility — false |
+| Clear absorbs Invoice features | Scope creep toward freee; violates narrow-product strategy |
+| Shared database | Couples schemas; bypasses API contracts |
 
 ## Consequences
 
-- `docs/products/nene-clear.md` is the durable strategy reference (English).
-- Profile README and articles should link **NeNe Clear** when the repo goes public.
-- `nene-invoice` stars/traffic are not success metrics for this product.
-- Review positioning when `nene-clear` reaches Phase 3 (Tier A installer).
+- `docs/products/nene-clear.md` describes **reconciliation/dunning only**.
+- Invoice roadmap items (PO, contracts, subscriptions, expenses) stay with Invoice strategy — not Clear.
+- Profile README and articles must **name both products** when describing back office.
+- Success metrics: Invoice stars on `nene-invoice`; Clear stars on `nene-clear` after public launch.
 
 ## Related
 
-- Product strategy detail: [`docs/products/nene-clear.md`](../products/nene-clear.md)
-- Portfolio weapons: [`docs/positioning-matrix.md`](../positioning-matrix.md)
-- Issue: #11 (publication-strategy)
+- Product strategy: [`docs/products/nene-clear.md`](../products/nene-clear.md)
+- Clear ADR 0009: `nene-clear` repo
+- Issue: #11 (original), amendment #13
