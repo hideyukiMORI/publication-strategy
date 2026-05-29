@@ -1,17 +1,32 @@
 # NeNe Clear — Product Strategy
 
 Cross-project strategy for **NeNe Clear**. Implementation docs and code live
-in the private product repository [`nene-clear`](https://github.com/hideyukiMORI/nene-clear)
-(when accessible to maintainers).
+in the private product repository [`nene-clear`](https://github.com/hideyukiMORI/nene-clear).
 
 Decision record: [`0004-nene-clear-product-strategy.md`](../decisions/0004-nene-clear-product-strategy.md).
 
 ---
 
+## Domain split (read first)
+
+**NeNe Clear and NeNe Invoice are completely separate products.**
+
+| Product | Repository | Domain |
+| --- | --- | --- |
+| **NeNe Invoice** | [`nene-invoice`](https://github.com/hideyukiMORI/nene-invoice) | Quote, invoice, payment management — **見積・請求・入金管理** |
+| **NeNe Clear** | `nene-clear` | Payment reconciliation & dunning — **入金消込・督促管理** |
+
+- **Not upper compatible.** Clear does not replace Invoice. No migration path.
+- **Intended production:** both apps on the same server, **HTTP between them**, separate databases.
+
+---
+
 ## One line
 
-**Self-hosted quote-to-cash billing for Japan SMB** — qualified invoices, payment
-clearing, and dunning on infrastructure the operator already owns.
+**Self-hosted payment reconciliation and dunning for Japan SMB** — match bank
+deposits to billed receivables, send logged overdue reminders.
+
+**Not** quote or invoice issuance — that is NeNe Invoice.
 
 ---
 
@@ -20,120 +35,66 @@ clearing, and dunning on infrastructure the operator already owns.
 | Layer | Products |
 | --- | --- |
 | **Framework** | NeNe, NENE2, nene2-python, nene2-node |
-| **Front office** | NeNe Records (CMS), NeNe Corpus (knowledge chat), NeNe Concierge (scenario chat) |
-| **Back office** | **NeNe Clear** (billing) |
+| **Front office** | NeNe Records, NeNe Corpus, NeNe Concierge |
+| **Back office — billing documents** | **NeNe Invoice** (`nene-invoice`) |
+| **Back office — reconciliation** | **NeNe Clear** (`nene-clear`) |
 
 ```
-Visitor-facing site
-  ├── Corpus    — ask questions (cited)
-  ├── Concierge — convert (scenario chat)
-  └── Records   — content & catalog
-
 Operator back office (same server or VPS)
-  └── Clear       — quote → invoice → collect → clear
+  ├── Invoice  — 見積 · 請求 · 入金管理
+  └── Clear    — 入金消込 · 督促管理
+        ↓ HTTP (Invoice API)
+      Invoice
 ```
 
-Integration: **HTTP only** between siblings — never shared databases.
+Integration: **HTTP only** — never shared databases.
 
 ---
 
 ## Ideals
 
-1. **Clear money trail** — quote, invoice, deposit, and outstanding balance in
-   one auditable place (not email + Excel + bank CSV).
-2. **Self-hosting as feature** — Tier A shared hosting beside WordPress; no
-   extra SaaS subscription for billing ops.
-3. **Compliance as structure** — 適格請求書 rules enforced in the API, not
-   decorative PDF fields.
-4. **Human confirms, AI proposes** — Admin UI for decisions; OpenAPI/MCP for
-   agents; audit log for matches and dunning.
-5. **Narrow and deep** — quote-to-cash first; resist becoming freee.
+1. **One domain, done well** — reconciliation and dunning only; no invoice scope creep.
+2. **Invoice upstream is truth** — Clear never owns issued invoice figures.
+3. **Human confirms, AI proposes** — match suggestions require operator confirmation.
+4. **Compliance as structure** — binding reconciliation/dunning rules in Clear repo.
+5. **Self-hosting** — beside Invoice on Tier A shared hosting.
 
 ---
 
-## Philosophy (summary)
+## Core MVP (NeNe Clear)
 
-- **Clear over clever** — explicit layers, integer cents, registered terminology,
-  OpenAPI before UI.
-- **Dual surface** — every operator action reachable by documented HTTP/MCP;
-  no hidden SQL paths for agents.
-- **Bilingual operators, Japanese law** — admin UI ja + en; statutory invoice
-  content Japanese (same pattern as other NeNe apps).
-
-Full product philosophy doc: `nene-clear` repo → `docs/explanation/philosophy.md`.
-
----
-
-## Core MVP (Phase 1–3)
-
-Before any expansion item:
-
-- Multi-tenant foundation (`organization_id`, roles: superadmin / admin / member)
-- Clients, quotes, invoices, line items, payments
-- Japan qualified invoice validation + PDF
+- Multi-tenant foundation
+- NeNe Invoice API upstream (read invoices/outstanding; write payments on match)
+- Bank CSV import → `bank_transaction`
+- Human-confirmed match → `payment_reconciliation` + audit
+- Dunning templates + send log + minimum interval
 - Admin UI (ja + en)
-- Tier A: web installer + release ZIP
+- Tier A: web installer + release ZIP (Clear as second app)
+
+**Not in Clear MVP:** quotes, invoices, PDF, tax validation — see `nene-invoice`.
 
 ---
 
-## Post-MVP expansion roadmap (approved order)
+## What is NOT on Clear's roadmap
 
-### 1. Payment reconciliation & dunning — 入金消込・督促管理
+These belong to **NeNe Invoice** (or future Invoice expansions), not Clear:
 
-**Why first:** Completes quote-to-cash; daily pain for office managers; extends
-`payment` / `overdue` without new document types.
+- Purchase orders & delivery notes
+- Contract renewal
+- Subscription billing
+- Expense reimbursement
 
-| MVP | Out of scope (initially) |
-| --- | --- |
-| Bank CSV import → `bank_transaction` | Bank API / Moneytree sync |
-| Manual + rule-based match suggestions | Fully automatic clearing without confirm |
-| AI-assisted match via MCP (propose only) | AI silent writes |
-| Dunning email templates + send log | Debt-collection automation |
-
-Phases: import → manual match → suggestions → dunning.
-
-### 2. Purchase order & delivery note — 発注書・納品書管理
-
-**Why second:** Extends document chain PO → delivery → invoice for B2B
-wholesale/manufacturing persona.
-
-- `purchase_order` to suppliers; `delivery_note` linked to quote/invoice
-- Reuses line-item and PDF patterns
-- Not inventory / stock (future NeNe Shop territory)
-
-### 3. Contract term & renewal — 契約期限・更新管理
-
-**Why third:** Client master + renewal quotes before subscription engine.
-
-- `contract`: start/end, auto_renew, renewal_notice_days
-- Expiry dashboard; one-click renewal quote
-- Not full CLM (DocuSign / CloudSign)
-
-### 4. Small-scale subscription billing — 小規模サブスク請求管理
-
-**Why fourth:** Needs stable invoice + payment + preferably reconciliation.
-
-- Monthly/yearly plans; scheduled draft invoices
-- Pause / cancel
-- Not proration, metered billing, or card-on-file in MVP
-
-### 5. Minimal expense reimbursement — 経費申請の最小版
-
-**Why last:** Different actor (employee); approval workflow; minimal scope only.
-
-- Submit → single-step approve → CSV export for accountant
-- Not payroll, commute rules, or corporate card feeds
+Legacy Clear docs that listed these as "Expansion #2–5" are **void** — see
+Clear repo `docs/explanation/scope-boundary.md`.
 
 ---
 
 ## Target persona
 
-Regional **food ingredient wholesaler**, ~8 staff, shared hosting, office manager
-issues 適格請求書 from admin UI instead of Excel + manual PDF. freee monthly
-fee feels heavy; operator already pays for hosting.
-
-Same pattern: small manufacturers, agencies, equipment dealers — B2B
-quote-before-invoice.
+Regional **food ingredient wholesaler** already on NeNe Invoice. Office manager
+downloads bank CSV weekly, matches in Excel, sends overdue emails manually.
+Wants **reconciliation screen + audit trail + dunning history** without moving
+invoices out of Invoice.
 
 ---
 
@@ -141,12 +102,12 @@ quote-before-invoice.
 
 | Phase | Action |
 | --- | --- |
-| Pre-launch | Private `nene-clear`; strategy here only |
-| Phase 3 complete | Flip repo public; GitHub About + profile README row |
-| Article | One product story — Japan SMB self-hosted billing + MCP (Zenn JP or DEV EN) |
-| Do not | Mix Clear launch with framework or Records narrative in same post |
+| Pre-launch | Private `nene-clear`; strategy here |
+| MVP complete | Flip Clear public; document **Invoice + Clear** two-app setup |
+| Article | Reconciliation/dunning story — link Invoice as prerequisite |
+| Do not | Describe Clear as "full billing" or Invoice replacement |
 
-Track stars/traffic on **`nene-clear`** after public — not `nene-invoice`.
+Track stars separately: **`nene-invoice`** for billing, **`nene-clear`** for reconciliation.
 
 ---
 
@@ -154,14 +115,16 @@ Track stars/traffic on **`nene-clear`** after public — not `nene-invoice`.
 
 | Repo | Purpose |
 | --- | --- |
-| `nene-clear` | **Canonical** — private until launch |
-| `nene-invoice` | Discard or archive after migration; not strategy SSOT |
+| `nene-invoice` | **Quote · invoice · payment** — public, active |
+| `nene-clear` | **Reconciliation · dunning** — private until launch |
 | `publication-strategy` | This file + decision 0004 |
+
+**Not:** "discard Invoice after migration."
 
 ---
 
 ## Review
 
-Revisit when `nene-clear` Phase 3 lands or Expansion #1 ships — 2026-Q3 or later.
+Revisit when Clear MVP lands or Invoice upstream OpenAPI stabilizes — 2026-Q3 or later.
 
-Last updated: 2026-05-29 (Issue #11)
+Last updated: 2026-05-29 (domain split amendment)
