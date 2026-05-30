@@ -37,10 +37,11 @@ HTTP only between apps. Separate databases.
 
 ## Ideals
 
-1. **Storage wedge, honest marketing** — replaces BOX-style fees, not MF entire suite.
+1. **Storage wedge, honest marketing** — replaces storage-only subscription fees, not a full bundled accounting suite.
 2. **Received ≠ issued** — Invoice SSOT for outbound billing; Vault for inbound evidence.
 3. **Compliance as structure** — binding scope contract + received-document compliance doc.
 4. **Self-hosting** — Tier A beside siblings.
+5. **No third-party product names** in repository docs (ADR 0013 in `nene-vault`).
 
 ---
 
@@ -60,7 +61,7 @@ HTTP only between apps. Separate databases.
 
 ## Target persona
 
-SMB paying **¥数千–数万/月** for document storage inside MF/freee but only using
+SMB paying **¥数千–数万/月** for document storage inside a bundled cloud suite but only using
 upload and search — wants self-hosted 電帳法-oriented archive.
 
 ---
@@ -70,7 +71,7 @@ upload and search — wants self-hosted 電帳法-oriented archive.
 | Phase | Action |
 | --- | --- |
 | Phase 0 (2026-05-30) | **Public** repo; strategy here; runtime MVP pending |
-| MVP | Article: "cancel BOX subscription" story |
+| MVP | Article: self-hosted received-document archive story |
 | Do not | Claim full accounting replacement |
 
 Last updated: 2026-05-29

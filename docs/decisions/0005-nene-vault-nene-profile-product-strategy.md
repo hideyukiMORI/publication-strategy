@@ -11,7 +11,7 @@ Accepted
 The maintainer is completing **NeNe Clear** (reconciliation & dunning) and wants
 two additional self-hosted products to:
 
-1. **Displace storage-only SaaS fees** (MF BOX, freee document modules) — **NeNe Vault**
+1. **Displace storage-only SaaS fees** (bundled document-storage modules) — **NeNe Vault**
 2. **Displace closed bank CSV presets** and reduce Clear scope creep — **NeNe Profile**
 
 Both products inherit NENE2 governance, run beside Invoice/Clear on Tier A hosting,
@@ -24,8 +24,8 @@ Portfolio already defines:
 | NeNe Invoice | Issued billing documents |
 | NeNe Clear | Reconciliation & dunning |
 
-Adding Vault and Profile completes a **four-app back office** without recreating
-Money Forward as a monolith.
+Adding Vault and Profile completes a **four-app back office** without recreating a
+monolithic bundled accounting suite.
 
 ## Decision
 
