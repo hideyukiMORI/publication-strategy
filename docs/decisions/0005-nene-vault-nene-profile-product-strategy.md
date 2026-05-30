@@ -35,7 +35,7 @@ Money Forward as a monolith.
 | --- | --- |
 | **Name** | NeNe Vault |
 | **Domain** | Received-document archive (電子帳簿保存法-oriented storage & search) |
-| **Repo** | `hideyukiMORI/nene-vault` (private until launch) |
+| **Repo** | [`hideyukiMORI/nene-vault`](https://github.com/hideyukiMORI/nene-vault) (public since 2026-05-30) |
 | **Replaces (honest wedge)** | Storage + search subscription slice of mega-SaaS — **not** full accounting |
 | **Required upstream** | None (optional links to Invoice/Clear) |
 
@@ -45,7 +45,7 @@ Money Forward as a monolith.
 | --- | --- |
 | **Name** | NeNe Profile |
 | **Domain** | Bank CSV column mapping & normalization |
-| **Repo** | `hideyukiMORI/nene-profile` (private until launch) |
+| **Repo** | [`hideyukiMORI/nene-profile`](https://github.com/hideyukiMORI/nene-profile) (public since 2026-05-30) |
 | **Replaces (honest wedge)** | Closed bank-format handling / manual Excel cleanup |
 | **Primary downstream** | NeNe Clear (StandardTransaction ingest) |
 

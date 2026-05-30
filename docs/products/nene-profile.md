@@ -1,6 +1,6 @@
 # NeNe Profile — Product Strategy
 
-Cross-project strategy for **NeNe Profile**. Implementation docs live in the private
+Cross-project strategy for **NeNe Profile**. Implementation docs live in the public
 repository [`nene-profile`](https://github.com/hideyukiMORI/nene-profile).
 
 Decision record: [`0005-nene-vault-nene-profile-product-strategy.md`](../decisions/0005-nene-vault-nene-profile-product-strategy.md).
@@ -59,8 +59,8 @@ or Clear operator blocked when their regional bank changes export columns.
 
 | Phase | Action |
 | --- | --- |
-| Pre-launch | Private repo |
-| MVP | Public; article with Clear two-app pipeline demo |
+| Phase 0 (2026-05-30) | **Public** repo; runtime MVP pending |
+| MVP | Article with Clear two-app pipeline demo |
 | Do not | Market as reconciliation tool — that's Clear |
 
 Last updated: 2026-05-29
