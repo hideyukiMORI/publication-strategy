@@ -1,6 +1,6 @@
 # NeNe Vault — Product Strategy
 
-Cross-project strategy for **NeNe Vault**. Implementation docs live in the private
+Cross-project strategy for **NeNe Vault**. Implementation docs live in the public
 repository [`nene-vault`](https://github.com/hideyukiMORI/nene-vault).
 
 Decision record: [`0005-nene-vault-nene-profile-product-strategy.md`](../decisions/0005-nene-vault-nene-profile-product-strategy.md).
@@ -69,8 +69,8 @@ upload and search — wants self-hosted 電帳法-oriented archive.
 
 | Phase | Action |
 | --- | --- |
-| Pre-launch | Private repo; strategy here |
-| MVP | Flip public; article: "cancel BOX subscription" story |
+| Phase 0 (2026-05-30) | **Public** repo; strategy here; runtime MVP pending |
+| MVP | Article: "cancel BOX subscription" story |
 | Do not | Claim full accounting replacement |
 
 Last updated: 2026-05-29
